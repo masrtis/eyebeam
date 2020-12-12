@@ -1,4 +1,5 @@
 # eyebeam
+
 C++ ray tracing experiment
 
 ## Build Info
@@ -7,13 +8,17 @@ The build system used is [CMake](https://cmake.org/). The build has been tested 
 
 ### Visual Studio Code setup
 
-**External tools required**
+#### External tools required
 
 CMake 3.18.4 or higher  
 [vcpkg - build from source](https://github.com/Microsoft/vcpkg)  
-[SDL2](https://www.libsdl.org/)
+[SDL2](https://www.libsdl.org/)  
 
-**Extensions used for build**
+##### Windows specific tools
+
+[Visual Studio 2019 Community](https://visualstudio.microsoft.com/vs/community/) - this installs compilers that can be used by Visual Studio Code
+
+#### Extensions used for build
 
 Name: C/C++  
 Id: ms-vscode.cpptools  
@@ -29,7 +34,7 @@ Version: 1.5.3
 Publisher: Microsoft  
 [VS Marketplace Link](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cmake-tools)
 
-**Environment Variables required**
+#### Environment Variables required
 
 `VCPKG_ROOT` should be set to the root of the vcpkg clone locally.
 
