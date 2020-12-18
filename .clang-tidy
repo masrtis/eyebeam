@@ -1,1 +1,1 @@
-Checks: '*, -android*, -llvm*, -fuchsia*, -modernize-use-trailing-return-type'
+Checks: '*, -android*, -fuchsia*, -google*, -llvm*, -modernize-use-trailing-return-type'
