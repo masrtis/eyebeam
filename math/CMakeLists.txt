@@ -15,6 +15,7 @@ target_link_libraries(mathtest PRIVATE
 )
 
 add_executable(mathbench
+    constexpr_math_benchmark.cpp
     vector3_benchmark.cpp
 )
 
