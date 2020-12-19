@@ -89,6 +89,7 @@ Vector3 operator*(const Vector3& left, float right) noexcept;
 Vector3 operator*(float left, const Vector3& right) noexcept;
 Vector3 operator/(const Vector3& left, float right) noexcept;
 
+float length(const Vector3& v) noexcept;
 void normalize(Vector3& v) noexcept;
 Vector3 norm(Vector3 v) noexcept;
 
@@ -123,11 +124,6 @@ constexpr auto cross(const Vector3& left, const Vector3& right) noexcept
 constexpr auto lengthSquared(const Vector3& v) noexcept
 {
     return dot(v, v);
-}
-
-constexpr auto length(const Vector3& v) noexcept
-{
-    return sqrt(lengthSquared(v));
 }
 
 std::ostream& operator<<(std::ostream& os, const Vector3& out);

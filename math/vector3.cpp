@@ -1,5 +1,6 @@
 #include "vector3.h"
 
+#include <cmath>
 #include <ostream>
 
 namespace eyebeam
@@ -34,6 +35,11 @@ Vector3 operator*(float left, const Vector3& right) noexcept
 Vector3 operator/(const Vector3& left, float right) noexcept
 {
     return left * (1.0F / right);
+}
+
+float length(const Vector3& v) noexcept
+{
+    return std::sqrt(lengthSquared(v));
 }
 
 void normalize(Vector3& v) noexcept
