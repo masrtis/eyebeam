@@ -231,7 +231,7 @@ TEST(Vector3Tests, LengthReturnsVectorLength)
     constexpr Vector3 v(0.5F, -0.33333333F, 1.0F);
 
     // WHEN:
-    constexpr auto result = length(v);
+    const auto result = length(v);
 
     // THEN:
     constexpr auto expected = 1.16666667F;
