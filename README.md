@@ -4,19 +4,24 @@ C++ ray tracing experiment
 
 ## Build Info
 
-The build system used is [CMake](https://cmake.org/). The build has been tested using Visual Studio Code.
+The build system used is [CMake](https://cmake.org/). The build has been tested using Visual Studio Code using both Visual Studio 2019 and Clang 10.0.0.
 
 ### Visual Studio Code setup
 
 #### External tools required
 
-CMake 3.18.4 or higher  
+[CMake 3.18.4 or higher](https://cmake.org/)  
 [vcpkg - build from source](https://github.com/Microsoft/vcpkg)  
-[SDL2](https://www.libsdl.org/)  
 
 ##### Windows specific tools
 
 [Visual Studio 2019 Community](https://visualstudio.microsoft.com/vs/community/) - this installs compilers that can be used by Visual Studio Code
+
+#### External libraries required
+
+[SDL2](https://www.libsdl.org/)  
+[GTest/GMock](https://github.com/google/googletest)  
+[benchmark](https://github.com/google/benchmark)  
 
 #### Extensions used for build
 
