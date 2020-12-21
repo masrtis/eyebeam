@@ -1,5 +1,8 @@
 #include "random_generator.h"
 
+#include "point3.h"
+#include "vector3.h"
+
 #include <random>
 
 namespace eyebeam
@@ -25,7 +28,12 @@ float RandomGenerator::generateRandomFloat()
 
 Vector3 RandomGenerator::generateRandomVector3()
 {
-    return {generateRandomFloat(), generateRandomFloat(), generateRandomFloat()};
+    return Vector3(generateRandomFloat(), generateRandomFloat(), generateRandomFloat());
+}
+
+Point3 RandomGenerator::generateRandomPoint3()
+{
+    return Point3(generateRandomFloat(), generateRandomFloat(), generateRandomFloat());
 }
 
 } // namespace eyebeam
