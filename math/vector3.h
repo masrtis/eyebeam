@@ -1,53 +1,24 @@
 #ifndef INCLUDED_VECTOR4_H_
 #define INCLUDED_VECTOR4_H_
 
+// NOLINTNEXTLINE
+#include "components.h"
 #include "constexpr_math.h"
 
-#include <array>
 #include <iosfwd>
 
 namespace eyebeam
 {
 
-class Vector3
+class Vector3 : public Components
 {
 public:
-    constexpr Vector3() noexcept : Vector3(0.0f, 0.0f, 0.0f)
+    constexpr Vector3() noexcept
     {
     }
 
-    constexpr Vector3(float x, float y, float z) noexcept : m_components{x, y, z, 0.0f}
+    explicit constexpr Vector3(float x, float y, float z) noexcept : Components(x, y, z, 0.0f)
     {
-    }
-
-    constexpr auto x() const noexcept
-    {
-        return m_components[0];
-    }
-
-    constexpr auto y() const noexcept
-    {
-        return m_components[1];
-    }
-
-    constexpr auto z() const noexcept
-    {
-        return m_components[2];
-    }
-
-    auto& x() noexcept
-    {
-        return m_components[0];
-    }
-
-    auto& y() noexcept
-    {
-        return m_components[1];
-    }
-
-    auto& z() noexcept
-    {
-        return m_components[2];
     }
 
     auto& operator+=(const Vector3& rhs) noexcept
@@ -78,9 +49,6 @@ public:
     {
         return *this *= (1.0f / rhs);
     }
-
-private:
-    std::array<float, 4> m_components;
 };
 
 Vector3 operator+(const Vector3& left, const Vector3& right) noexcept;
@@ -96,16 +64,6 @@ Vector3 norm(Vector3 v) noexcept;
 constexpr auto operator-(const Vector3& operand) noexcept
 {
     return Vector3(-operand.x(), -operand.y(), -operand.z());
-}
-
-constexpr auto operator==(const Vector3& left, const Vector3& right) noexcept
-{
-    return areEqual(left.x(), right.x()) && areEqual(left.y(), right.y()) && areEqual(left.z(), right.z());
-}
-
-constexpr auto operator!=(const Vector3& left, const Vector3& right) noexcept
-{
-    return !(left == right);
 }
 
 constexpr auto dot(const Vector3& left, const Vector3& right) noexcept

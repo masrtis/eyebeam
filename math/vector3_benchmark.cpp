@@ -151,5 +151,3 @@ BENCHMARK(benchmarkVector3Norm);
 
 } // namespace
 } // namespace eyebeam
-
-BENCHMARK_MAIN();
