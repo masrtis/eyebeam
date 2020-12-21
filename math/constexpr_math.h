@@ -30,8 +30,8 @@ constexpr float sqrt(float x)
         return 0.0F;
     }
 
-    float guess = x;
-    float nextGuess = 0.5F * (guess + x / guess);
+    auto guess = x;
+    auto nextGuess = 0.5F * (guess + x / guess);
 
     while (abs(guess - nextGuess) > std::numeric_limits<float>::epsilon())
     {
@@ -42,9 +42,12 @@ constexpr float sqrt(float x)
     return guess;
 }
 
+// NOLINTNEXTLINE(bugprone-exception-escape)
 constexpr bool areEqual(float left, float right) noexcept
 {
-    constexpr float epsilon = sqrt(std::numeric_limits<float>::epsilon());
+    static_assert(std::numeric_limits<float>::epsilon() > 0.0F);
+
+    constexpr auto epsilon = sqrt(std::numeric_limits<float>::epsilon());
     return abs(left - right) <= epsilon * std::max({1.0F, left, right});
 }
 

@@ -16,10 +16,9 @@ void benchmarkStdAbs(benchmark::State& state)
 {
     const auto rand(RandomGenerator::generateRandomFloat());
 
-    for (auto s : state)
+    for ([[maybe_unused]] auto s : state)
     {
-        // NOLINTNEXTLINE(clang-analyzer-deadcode.DeadStores)
-        const auto result = std::abs(rand);
+        benchmark::DoNotOptimize(std::abs(rand));
     }
 }
 
@@ -27,10 +26,9 @@ void benchmarkStdSqrt(benchmark::State& state)
 {
     const auto rand(RandomGenerator::generateRandomFloat());
 
-    for (auto s : state)
+    for ([[maybe_unused]] auto s : state)
     {
-        // NOLINTNEXTLINE(clang-analyzer-deadcode.DeadStores)
-        const auto result = std::sqrt(rand);
+        benchmark::DoNotOptimize(std::sqrt(rand));
     }
 }
 
@@ -38,10 +36,9 @@ void benchmarkConstexprSqrt(benchmark::State& state)
 {
     const auto rand(RandomGenerator::generateRandomFloat());
 
-    for (auto s : state)
+    for ([[maybe_unused]] auto s : state)
     {
-        // NOLINTNEXTLINE(clang-analyzer-deadcode.DeadStores)
-        const auto result = sqrt(rand);
+        benchmark::DoNotOptimize(sqrt(rand));
     }
 }
 
@@ -49,10 +46,9 @@ void benchmarkConstexprAbs(benchmark::State& state)
 {
     const auto rand(RandomGenerator::generateRandomFloat());
 
-    for (auto s : state)
+    for ([[maybe_unused]] auto s : state)
     {
-        // NOLINTNEXTLINE(clang-analyzer-deadcode.DeadStores)
-        const auto result = abs(rand);
+        benchmark::DoNotOptimize(abs(rand));
     }
 }
 

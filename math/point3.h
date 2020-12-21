@@ -13,10 +13,7 @@ namespace eyebeam
 class Point3 : public Components
 {
 public:
-    constexpr Point3() noexcept
-    {
-    }
-
+    Point3() = default;
     explicit constexpr Point3(float x, float y, float z) noexcept : Components(x, y, z, 1.0F)
     {
     }

@@ -13,11 +13,8 @@ namespace eyebeam
 class Vector3 : public Components
 {
 public:
-    constexpr Vector3() noexcept
-    {
-    }
-
-    explicit constexpr Vector3(float x, float y, float z) noexcept : Components(x, y, z, 0.0f)
+    Vector3() = default;
+    explicit constexpr Vector3(float x, float y, float z) noexcept : Components(x, y, z, 0.0F)
     {
     }
 
@@ -47,7 +44,7 @@ public:
 
     auto& operator/=(float rhs) noexcept
     {
-        return *this *= (1.0f / rhs);
+        return *this *= (1.0F / rhs);
     }
 };
 

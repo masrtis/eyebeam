@@ -6,6 +6,11 @@ add_library(math
     vector3.cpp
 )
 
+target_link_libraries(math PRIVATE
+    enable_cxx_17
+    enable_warnings
+)
+
 add_executable(mathtest
     constexpr_math_test.cpp
     point3_test.cpp
@@ -13,6 +18,8 @@ add_executable(mathtest
 )
 
 target_link_libraries(mathtest PRIVATE
+    enable_cxx_17
+    enable_warnings
     math
     GTest::gmock_main # See https://github.com/google/googletest/issues/2157#issuecomment-674361850
 )
@@ -25,6 +32,8 @@ add_executable(mathbench
 )
 
 target_link_libraries(mathbench PRIVATE
+    enable_cxx_17
+    enable_warnings
     math
     benchmark::benchmark
     benchmark::benchmark_main

@@ -15,9 +15,9 @@ void benchmarkVector3OperatorPlus(benchmark::State& state)
     Vector3 randLeft(RandomGenerator::generateRandomVector3());
     Vector3 randRight(RandomGenerator::generateRandomVector3());
 
-    for (auto s : state)
+    for ([[maybe_unused]] auto s : state)
     {
-        const auto result(randLeft + randRight);
+        benchmark::DoNotOptimize(randLeft + randRight);
     }
 }
 
@@ -26,9 +26,9 @@ void benchmarkVector3OperatorMinus(benchmark::State& state)
     Vector3 randLeft(RandomGenerator::generateRandomVector3());
     Vector3 randRight(RandomGenerator::generateRandomVector3());
 
-    for (auto s : state)
+    for ([[maybe_unused]] auto s : state)
     {
-        const auto result(randLeft - randRight);
+        benchmark::DoNotOptimize(randLeft - randRight);
     }
 }
 
@@ -37,9 +37,9 @@ void benchmarkVector3OperatorMultiplyScaleOnRight(benchmark::State& state)
     Vector3 randLeft(RandomGenerator::generateRandomVector3());
     float scale = RandomGenerator::generateRandomFloat();
 
-    for (auto s : state)
+    for ([[maybe_unused]] auto s : state)
     {
-        const auto result(randLeft * scale);
+        benchmark::DoNotOptimize(randLeft * scale);
     }
 }
 
@@ -48,9 +48,9 @@ void benchmarkVector3OperatorMultiplyScaleOnLeft(benchmark::State& state)
     Vector3 randRight(RandomGenerator::generateRandomVector3());
     float scale = RandomGenerator::generateRandomFloat();
 
-    for (auto s : state)
+    for ([[maybe_unused]] auto s : state)
     {
-        const auto result(scale * randRight);
+        benchmark::DoNotOptimize(scale * randRight);
     }
 }
 
@@ -59,9 +59,9 @@ void benchmarkVector3OperatorDivide(benchmark::State& state)
     Vector3 randLeft(RandomGenerator::generateRandomVector3());
     float scale = RandomGenerator::generateRandomFloat();
 
-    for (auto s : state)
+    for ([[maybe_unused]] auto s : state)
     {
-        const auto result(randLeft / scale);
+        benchmark::DoNotOptimize(randLeft / scale);
     }
 }
 
@@ -69,9 +69,9 @@ void benchmarkVector3Negation(benchmark::State& state)
 {
     Vector3 rand(RandomGenerator::generateRandomVector3());
 
-    for (auto s : state)
+    for ([[maybe_unused]] auto s : state)
     {
-        const auto result(-rand);
+        benchmark::DoNotOptimize(-rand);
     }
 }
 
@@ -80,10 +80,9 @@ void benchmarkVector3DotProduct(benchmark::State& state)
     Vector3 randLeft(RandomGenerator::generateRandomVector3());
     Vector3 randRight(RandomGenerator::generateRandomVector3());
 
-    for (auto s : state)
+    for ([[maybe_unused]] auto s : state)
     {
-        // NOLINTNEXTLINE(clang-analyzer-deadcode.DeadStores)
-        const auto result = dot(randLeft, randRight);
+        benchmark::DoNotOptimize(dot(randLeft, randRight));
     }
 }
 
@@ -92,9 +91,9 @@ void benchmarkVector3CrossProduct(benchmark::State& state)
     Vector3 randLeft(RandomGenerator::generateRandomVector3());
     Vector3 randRight(RandomGenerator::generateRandomVector3());
 
-    for (auto s : state)
+    for ([[maybe_unused]] auto s : state)
     {
-        const auto result = cross(randLeft, randRight);
+        benchmark::DoNotOptimize(cross(randLeft, randRight));
     }
 }
 
@@ -102,10 +101,9 @@ void benchmarkVector3LengthSquared(benchmark::State& state)
 {
     Vector3 rand(RandomGenerator::generateRandomVector3());
 
-    for (auto s : state)
+    for ([[maybe_unused]] auto s : state)
     {
-        // NOLINTNEXTLINE(clang-analyzer-deadcode.DeadStores)
-        const auto result = lengthSquared(rand);
+        benchmark::DoNotOptimize(lengthSquared(rand));
     }
 }
 
@@ -113,10 +111,9 @@ void benchmarkVector3Length(benchmark::State& state)
 {
     Vector3 rand(RandomGenerator::generateRandomVector3());
 
-    for (auto s : state)
+    for ([[maybe_unused]] auto s : state)
     {
-        // NOLINTNEXTLINE(clang-analyzer-deadcode.DeadStores)
-        const auto result = length(rand);
+        benchmark::DoNotOptimize(length(rand));
     }
 }
 
@@ -124,9 +121,9 @@ void benchmarkVector3Norm(benchmark::State& state)
 {
     Vector3 rand(RandomGenerator::generateRandomVector3());
 
-    for (auto s : state)
+    for ([[maybe_unused]] auto s : state)
     {
-        const auto result = norm(rand);
+        benchmark::DoNotOptimize(norm(rand));
     }
 }
 

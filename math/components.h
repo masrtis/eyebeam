@@ -20,42 +20,48 @@ public:
     {
     }
 
-    constexpr auto x() const noexcept
+    Components(const Components&) = default;
+    Components(Components&&) = default;
+
+    Components& operator=(const Components&) = default;
+    Components& operator=(Components&&) = default;
+
+    [[nodiscard]] constexpr auto x() const noexcept
     {
         return m_components[0];
     }
 
-    constexpr auto y() const noexcept
+    [[nodiscard]] constexpr auto y() const noexcept
     {
         return m_components[1];
     }
 
-    constexpr auto z() const noexcept
+    [[nodiscard]] constexpr auto z() const noexcept
     {
         return m_components[2];
     }
 
-    constexpr auto w() const noexcept
+    [[nodiscard]] constexpr auto w() const noexcept
     {
         return m_components[3];
     }
 
-    auto& x() noexcept
+    [[nodiscard]] auto& x() noexcept
     {
         return m_components[0];
     }
 
-    auto& y() noexcept
+    [[nodiscard]] auto& y() noexcept
     {
         return m_components[1];
     }
 
-    auto& z() noexcept
+    [[nodiscard]] auto& z() noexcept
     {
         return m_components[2];
     }
 
-    auto& w() noexcept
+    [[nodiscard]] auto& w() noexcept
     {
         return m_components[3];
     }
@@ -67,11 +73,13 @@ private:
     std::array<float, 4> m_components;
 };
 
+// NOLINTNEXTLINE(bugprone-exception-escape)
 constexpr auto operator==(const Components& left, const Components& right) noexcept
 {
     return areEqual(left.x(), right.x()) && areEqual(left.y(), right.y()) && areEqual(left.z(), right.z());
 }
 
+// NOLINTNEXTLINE(bugprone-exception-escape)
 constexpr auto operator!=(const Components& left, const Components& right) noexcept
 {
     return !(left == right);
