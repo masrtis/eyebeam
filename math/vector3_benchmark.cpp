@@ -32,7 +32,7 @@ void benchmarkVector3OperatorMinus(benchmark::State& state)
     }
 }
 
-void benchmarkVector3OperatorMultiply(benchmark::State& state)
+void benchmarkVector3OperatorMultiplyScaleOnRight(benchmark::State& state)
 {
     Vector3 randLeft(RandomGenerator::generateRandomVector3());
     float scale = RandomGenerator::generateRandomFloat();
@@ -40,6 +40,17 @@ void benchmarkVector3OperatorMultiply(benchmark::State& state)
     for (auto s : state)
     {
         const auto result(randLeft * scale);
+    }
+}
+
+void benchmarkVector3OperatorMultiplyScaleOnLeft(benchmark::State& state)
+{
+    Vector3 randRight(RandomGenerator::generateRandomVector3());
+    float scale = RandomGenerator::generateRandomFloat();
+
+    for (auto s : state)
+    {
+        const auto result(scale * randRight);
     }
 }
 
@@ -126,7 +137,10 @@ BENCHMARK(benchmarkVector3OperatorPlus);
 BENCHMARK(benchmarkVector3OperatorMinus);
 
 // NOLINTNEXTLINE
-BENCHMARK(benchmarkVector3OperatorMultiply);
+BENCHMARK(benchmarkVector3OperatorMultiplyScaleOnRight);
+
+// NOLINTNEXTLINE
+BENCHMARK(benchmarkVector3OperatorMultiplyScaleOnLeft);
 
 // NOLINTNEXTLINE
 BENCHMARK(benchmarkVector3OperatorDivide);
