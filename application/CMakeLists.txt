@@ -6,10 +6,10 @@ add_library(application
 )
 
 target_link_libraries(application PUBLIC
+    enable_cxx_17
+    enable_warnings
     SDL2::SDL2
 )
-
-target_compile_features(application PUBLIC cxx_std_17)
 
 add_executable(eyebeam main.cpp)
 

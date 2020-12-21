@@ -15,12 +15,12 @@ public:
     {
     }
 
-    constexpr auto input() const noexcept
+    [[nodiscard]] constexpr auto input() const noexcept
     {
         return m_input;
     }
 
-    constexpr auto result() const noexcept
+    [[nodiscard]] constexpr auto result() const noexcept
     {
         return m_result;
     }

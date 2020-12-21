@@ -1,1 +1,4 @@
-Checks: '*, -android*, -fuchsia*, -google*, -llvm*, -modernize-use-trailing-return-type'
+Checks: '*, -abseil*, -android*, -cppcoreguidelines-avoid-magic-numbers, -fuchsia*, -google*, -llvm*, -modernize-use-trailing-return-type'
+CheckOptions:
+    - key: readability-magic-numbers.IgnoredFloatingPointValues
+      value: '0.5;1.0;100.0'

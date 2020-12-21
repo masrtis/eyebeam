@@ -66,8 +66,8 @@ public:
     }
 
 private:
-    int m_argc;
-    char** m_argv;
+    [[maybe_unused]] int m_argc;
+    [[maybe_unused]] char** m_argv;
 
     std::unique_ptr<SDL_Window, WindowDeleter> m_window = nullptr;
 };
