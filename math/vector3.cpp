@@ -29,7 +29,9 @@ Vector3 operator*(const Vector3& left, float right) noexcept
 
 Vector3 operator*(float left, const Vector3& right) noexcept
 {
-    return right * left;
+    auto result(right);
+    result *= left;
+    return result;
 }
 
 Vector3 operator/(const Vector3& left, float right) noexcept
