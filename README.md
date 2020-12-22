@@ -44,3 +44,31 @@ Publisher: Microsoft
 `VCPKG_ROOT` should be set to the root of the vcpkg clone locally.
 
 The CMake files assume that [SDL2](https://www.libsdl.org/) is available via [vcpkg](https://github.com/Microsoft/vcpkg). As a result, the VSCode settings that are checked in configure the CMake Tools extension to use the vcpkg CMake toolchain. In order to use these settings as is, the `VCPKG_ROOT` environment variable should be set to the root of the vcpkg clone.
+
+### Linux Setup
+
+Debian dependencies
+
+	apt install build-essentials clang libgtest-dev libgmock-dev libbenchmark-dev
+
+#### Compiling
+
+Switch to Clang as the default compiler for this terminal session:
+
+	export CC=clang
+	export CXX=clang++
+
+Then make an out-of-source build directory and run cmake to configure
+the build:
+
+	mkdir build
+	cd build
+	cmake ..
+
+Then compile the project with make:
+
+	make -j$(nproc)
+
+Then you can run the application:
+
+	./application/eyebeam
