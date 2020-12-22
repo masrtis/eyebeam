@@ -2,6 +2,7 @@
 #define INCLUDED_RANDOM_GENERATOR_H_
 
 #include "point3.h"
+#include "ray3.h"
 #include "vector3.h"
 
 namespace eyebeam
@@ -13,6 +14,7 @@ public:
     static float generateRandomFloat();
     static Vector3 generateRandomVector3();
     static Point3 generateRandomPoint3();
+    static Ray3 generateRandomRay3();
 };
 
 } // namespace eyebeam
