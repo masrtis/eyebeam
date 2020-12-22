@@ -2,3 +2,5 @@ Checks: '*, -abseil*, -android*, -cppcoreguidelines-avoid-magic-numbers, -fuchsi
 CheckOptions:
     - key: readability-magic-numbers.IgnoredFloatingPointValues
       value: '0.5;1.0;100.0'
+    - key: readability-magic-numbers.IgnoredIntegerValues
+      value: '1;2;3;4;16'

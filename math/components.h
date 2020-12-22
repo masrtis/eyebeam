@@ -9,7 +9,7 @@
 namespace eyebeam
 {
 
-class Components
+class alignas(16) Components
 {
 public:
     constexpr Components() noexcept : Components(0.0F, 0.0F, 0.0F, 0.0F)
