@@ -3,6 +3,7 @@ add_library(math
     constexpr_math.cpp
     point3.cpp
     random_generator.cpp
+    ray3.cpp
     vector3.cpp
 )
 
@@ -14,6 +15,7 @@ target_link_libraries(math PRIVATE
 add_executable(mathtest
     constexpr_math_test.cpp
     point3_test.cpp
+    ray3_test.cpp
     vector3_test.cpp
 )
 
@@ -27,6 +29,7 @@ target_link_libraries(mathtest PRIVATE
 add_executable(mathbench
     constexpr_math_benchmark.cpp
     point3_benchmark.cpp
+    ray3_benchmark.cpp
     vector3_benchmark.cpp
     math_benchmark_main.cpp
 )
