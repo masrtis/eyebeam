@@ -55,7 +55,7 @@ TEST(Point3Tests, OperatorPlusAddsVectorAndPoint)
 }
 
 // NOLINTNEXTLINE
-TEST(Point3, OperatorMinusSubtractsTwoConstantPoints)
+TEST(Point3Tests, OperatorMinusSubtractsTwoConstantPoints)
 {
     // GIVEN:
     constexpr Point3 left(4.0F, 0.25F, 0.0F);
