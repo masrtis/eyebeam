@@ -16,6 +16,7 @@ class Application
 public:
     virtual AppInit init() = 0;
     virtual void render() const = 0;
+    virtual void run() = 0;
 
     Application() = default;
 
