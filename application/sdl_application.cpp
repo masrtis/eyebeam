@@ -2,13 +2,19 @@
 
 #include <SDL2/SDL.h>
 
+#include <chrono>
+#include <cstdint>
 #include <memory>
+#include <ratio>
+#include <thread>
 
 namespace eyebeam
 {
 
 namespace
 {
+
+using Clock = std::chrono::steady_clock;
 
 struct WindowDeleter
 {
@@ -23,6 +29,54 @@ struct WindowDeleter
 
 constexpr int SCREEN_WIDTH = 640;
 constexpr int SCREEN_HEIGHT = 480;
+
+enum class EventLoopResult
+{
+    QuitApp,
+    ContinueLoop
+};
+
+auto pollForEvents(SDL_Event& event)
+{
+    auto shouldQuit = EventLoopResult::ContinueLoop;
+
+    while (SDL_PollEvent(&event) == 1)
+    {
+        switch (event.type)
+        {
+        case SDL_QUIT:
+            shouldQuit = EventLoopResult::QuitApp;
+            break;
+        case SDL_KEYUP:
+            if (event.key.keysym.sym == SDLK_q)
+            {
+                SDL_Event quitEvent;
+                quitEvent.type = SDL_QUIT;
+                SDL_PushEvent(&quitEvent);
+            }
+            break;
+        default:
+            break;
+        }
+    }
+
+    return shouldQuit;
+}
+
+void yieldExtraLoopTime(const Clock::time_point& loopStartTime)
+{
+    constexpr auto framesPerSecond(60);
+    using FrameDuration = std::chrono::duration<std::int64_t, std::ratio<1, framesPerSecond>>;
+    constexpr FrameDuration frameDuration(1);
+
+    const auto loopElapsedTime(Clock::now() - loopStartTime);
+    const auto loopExtraTime(frameDuration - loopElapsedTime);
+
+    if (loopExtraTime.count() > 0)
+    {
+        std::this_thread::sleep_for(loopExtraTime);
+    }
+}
 
 } // namespace
 
@@ -60,9 +114,6 @@ public:
         constexpr auto blue = 0xFF;
         SDL_FillRect(screenSurface, nullptr, SDL_MapRGB(screenSurface->format, red, green, blue));
         SDL_UpdateWindowSurface(m_window.get());
-
-        constexpr auto delayTime = 2000;
-        SDL_Delay(delayTime);
     }
 
 private:
@@ -87,7 +138,7 @@ SdlApplication::~SdlApplication()
 
 AppInit SdlApplication::init()
 {
-    if (SDL_Init(SDL_INIT_VIDEO) < 0)
+    if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_EVENTS) < 0)
     {
         return AppInit::InitFailed;
     }
@@ -98,6 +149,20 @@ AppInit SdlApplication::init()
 void SdlApplication::render() const
 {
     m_pAppData->render();
+}
+
+void SdlApplication::run()
+{
+    SDL_Event event;
+    auto shouldContinue = EventLoopResult::ContinueLoop;
+
+    do
+    {
+        const auto loopStartTime(Clock::now());
+        shouldContinue = pollForEvents(event);
+        render();
+        yieldExtraLoopTime(loopStartTime);
+    } while (shouldContinue == EventLoopResult::ContinueLoop);
 }
 
 } // namespace eyebeam

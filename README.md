@@ -2,6 +2,12 @@
 
 C++ ray tracing experiment
 
+## Controls
+
+All controls are case insensitive.
+
+- **Q** - Exits the application
+
 ## Build Info
 
 The build system used is [CMake](https://cmake.org/). The build has been tested using Visual Studio Code using both Visual Studio 2019 and Clang 10.0.0.
@@ -49,26 +55,26 @@ The CMake files assume that [SDL2](https://www.libsdl.org/) is available via [vc
 
 Debian dependencies
 
-	apt install build-essentials clang libgtest-dev libgmock-dev libbenchmark-dev
+    apt install build-essentials clang libgtest-dev libgmock-dev libbenchmark-dev
 
 #### Compiling
 
 Switch to Clang as the default compiler for this terminal session:
 
-	export CC=clang
-	export CXX=clang++
+    export CC=clang
+    export CXX=clang++
 
 Then make an out-of-source build directory and run cmake to configure
 the build:
 
-	mkdir build
-	cd build
-	cmake ..
+    mkdir build
+    cd build
+    cmake ..
 
 Then compile the project with make:
 
-	make -j$(nproc)
+    make -j$(nproc)
 
 Then you can run the application:
 
-	./application/eyebeam
+    ./application/eyebeam

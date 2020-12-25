@@ -21,8 +21,8 @@ public:
     SdlApplication& operator=(SdlApplication&&) = delete;
 
     AppInit init() final;
-
     void render() const final;
+    void run() final;
 
 private:
     class AppImpl;
