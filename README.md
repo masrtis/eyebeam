@@ -19,6 +19,12 @@ The build system used is [CMake](https://cmake.org/). The build has been tested 
 [CMake 3.18.4 or higher](https://cmake.org/)  
 [vcpkg - build from source](https://github.com/Microsoft/vcpkg)  
 
+##### vcpkg info
+
+vcpkg is configured to use vcpkg manifest mode. vcpkg is configured as a submodule which will need to be updated in order to update the dependent library versions. Bootstrapping vcpkg on first time checkout may be necessary.
+
+In order to use vcpkg in order to build with CMake, `CMAKE_TOOLCHAIN_FILE` should be set to `./vcpkg/scripts/buildsystems/vcpkg.cmake`.
+
 ##### Windows specific tools
 
 [Visual Studio 2019 Community](https://visualstudio.microsoft.com/vs/community/) - this installs compilers that can be used by Visual Studio Code
@@ -29,7 +35,7 @@ The build system used is [CMake](https://cmake.org/). The build has been tested 
 [GTest/GMock](https://github.com/google/googletest)  
 [benchmark](https://github.com/google/benchmark)  
 
-#### Extensions used for build
+#### Extensions used for VSCode build
 
 Name: C/C++  
 Id: ms-vscode.cpptools  
@@ -44,12 +50,6 @@ Description: Extended CMake support in Visual Studio Code
 Version: 1.5.3  
 Publisher: Microsoft  
 [VS Marketplace Link](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cmake-tools)
-
-#### Environment Variables required
-
-`VCPKG_ROOT` should be set to the root of the vcpkg clone locally.
-
-The CMake files assume that [SDL2](https://www.libsdl.org/) is available via [vcpkg](https://github.com/Microsoft/vcpkg). As a result, the VSCode settings that are checked in configure the CMake Tools extension to use the vcpkg CMake toolchain. In order to use these settings as is, the `VCPKG_ROOT` environment variable should be set to the root of the vcpkg clone.
 
 ### Linux Setup
 
