@@ -12,4 +12,5 @@ _deps
 build
 out
 *.pdb
+vcpkg_installed/
 .vs
