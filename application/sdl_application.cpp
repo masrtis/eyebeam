@@ -1,5 +1,8 @@
 #include "sdl_application.h"
 
+#include "scene.h"
+#include "scene_factory_json.h"
+
 #include <SDL2/SDL.h>
 
 #include <chrono>
@@ -26,9 +29,6 @@ struct WindowDeleter
         }
     }
 };
-
-constexpr int SCREEN_WIDTH = 640;
-constexpr int SCREEN_HEIGHT = 480;
 
 enum class EventLoopResult
 {
@@ -87,14 +87,37 @@ public:
     {
     }
 
+    [[nodiscard]] auto validateCommandLineParameters() const
+    {
+        if (m_argc != 2)
+        {
+            return AppInit::InvalidCommandLineArguments;
+        }
+
+        return AppInit::Succeeded;
+    }
+
+    auto loadScene()
+    {
+        const SceneFactoryJson sceneFactory;
+        m_scene = sceneFactory.buildScene(m_argv[1]); // NOLINT(cppcoreguidelines-pro-bounds-pointer-arithmetic)
+
+        if (m_scene == nullptr)
+        {
+            return AppInit::CouldNotLoadScene;
+        }
+
+        return AppInit::Succeeded;
+    }
+
     auto createWindow()
     {
         m_window.reset(SDL_CreateWindow(
             "eyebeam",
             SDL_WINDOWPOS_UNDEFINED, // NOLINT(hicpp-signed-bitwise)
             SDL_WINDOWPOS_UNDEFINED, // NOLINT(hicpp-signed-bitwise)
-            SCREEN_WIDTH,
-            SCREEN_HEIGHT,
+            m_scene->width(),
+            m_scene->height(),
             SDL_WINDOW_SHOWN));
 
         if (m_window == nullptr)
@@ -117,10 +140,11 @@ public:
     }
 
 private:
-    [[maybe_unused]] int m_argc;
-    [[maybe_unused]] char** m_argv;
+    int m_argc;
+    char** m_argv;
 
     std::unique_ptr<SDL_Window, WindowDeleter> m_window = nullptr;
+    std::unique_ptr<Scene> m_scene = nullptr;
 };
 
 SdlApplication::SdlApplication(int argc, char** argv) : m_pAppData(std::make_unique<AppImpl>(argc, argv))
@@ -138,9 +162,19 @@ SdlApplication::~SdlApplication()
 
 AppInit SdlApplication::init()
 {
+    if (m_pAppData->validateCommandLineParameters() == AppInit::InvalidCommandLineArguments)
+    {
+        return AppInit::InvalidCommandLineArguments;
+    }
+
+    if (m_pAppData->loadScene() == AppInit::CouldNotLoadScene)
+    {
+        return AppInit::CouldNotLoadScene;
+    }
+
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_EVENTS) < 0)
     {
-        return AppInit::InitFailed;
+        return AppInit::InitSubsystemsFailed;
     }
 
     return m_pAppData->createWindow();
@@ -163,6 +197,11 @@ void SdlApplication::run()
         render();
         yieldExtraLoopTime(loopStartTime);
     } while (shouldContinue == EventLoopResult::ContinueLoop);
+}
+
+std::string SdlApplication::getLastError() const
+{
+    return SDL_GetError();
 }
 
 } // namespace eyebeam

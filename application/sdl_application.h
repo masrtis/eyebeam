@@ -4,6 +4,7 @@
 #include "application.h"
 
 #include <memory>
+#include <string>
 
 namespace eyebeam
 {
@@ -23,6 +24,8 @@ public:
     AppInit init() final;
     void render() const final;
     void run() final;
+
+    [[nodiscard]] std::string getLastError() const final;
 
 private:
     class AppImpl;

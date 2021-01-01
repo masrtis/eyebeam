@@ -16,4 +16,5 @@ add_library(enable_cxx_17 INTERFACE)
 target_compile_features(enable_cxx_17 INTERFACE cxx_std_17)
 
 add_subdirectory(math)
+add_subdirectory(scene)
 add_subdirectory(application)
