@@ -7,6 +7,7 @@
 
 #include <filesystem>
 #include <fstream>
+#include <iostream>
 #include <iterator>
 #include <optional>
 #include <stdexcept>
@@ -57,6 +58,7 @@ std::unique_ptr<Scene> SceneFactoryJson::buildScene(std::string_view fileName) c
 
         if (!resolution.has_value())
         {
+            std::cerr << "Error loading resolution from " << fileName << "\n";
             return nullptr;
         }
 
@@ -64,6 +66,7 @@ std::unique_ptr<Scene> SceneFactoryJson::buildScene(std::string_view fileName) c
     }
     catch (const std::exception& e)
     {
+        std::cerr << "Error: " << e.what() << "\n";
         return nullptr;
     }
 }
