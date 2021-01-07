@@ -1,6 +1,7 @@
 add_library(math
     components.cpp
     constexpr_math.cpp
+    normal3.cpp
     point3.cpp
     random_generator.cpp
     ray3.cpp
@@ -14,6 +15,7 @@ target_link_libraries(math PRIVATE
 
 add_executable(mathtest
     constexpr_math_test.cpp
+    normal3_test.cpp
     point3_test.cpp
     ray3_test.cpp
     vector3_test.cpp
