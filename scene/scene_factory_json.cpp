@@ -5,6 +5,7 @@
 
 #include <nlohmann/json.hpp>
 
+#include <chrono>
 #include <filesystem>
 #include <fstream>
 #include <iostream>
@@ -53,6 +54,8 @@ std::unique_ptr<Scene> SceneFactoryJson::buildScene(std::string_view fileName) c
 {
     try
     {
+        const auto startTime(std::chrono::steady_clock::now());
+
         const auto sceneJson(parseJsonFromFile(fileName));
         const auto resolution(readResolution(sceneJson));
 
@@ -61,6 +64,9 @@ std::unique_ptr<Scene> SceneFactoryJson::buildScene(std::string_view fileName) c
             std::cerr << "Error loading resolution from " << fileName << "\n";
             return nullptr;
         }
+
+        const std::chrono::duration<double> duration(std::chrono::steady_clock::now() - startTime);
+        std::cout << "Scene file parsed in " << duration.count() << " seconds \n";
 
         return std::make_unique<Scene>(*resolution);
     }
