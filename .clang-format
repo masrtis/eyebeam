@@ -4,6 +4,7 @@ AllowAllArgumentsOnNextLine: 'false'
 AllowAllConstructorInitializersOnNextLine: 'false'
 AllowAllParametersOfDeclarationOnNextLine: 'false'
 AllowShortFunctionsOnASingleLine: None
+AlwaysBreakTemplateDeclarations: 'Yes'
 BinPackArguments: false
 BinPackParameters: false
 BreakBeforeBraces: Allman
