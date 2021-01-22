@@ -20,11 +20,15 @@ public:
     {
     }
 
-    Components(const Components&) = default;
-    Components(Components&&) = default;
+    explicit constexpr Components(const std::array<float, 4>& components) noexcept : m_components(components)
+    {
+    }
 
-    Components& operator=(const Components&) = default;
-    Components& operator=(Components&&) = default;
+    constexpr Components(const Components&) = default;
+    constexpr Components(Components&&) = default;
+
+    constexpr Components& operator=(const Components&) = default;
+    constexpr Components& operator=(Components&&) = default;
 
     [[nodiscard]] constexpr auto x() const noexcept
     {
