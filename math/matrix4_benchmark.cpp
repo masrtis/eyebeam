@@ -68,7 +68,7 @@ void benchmarkMatrix4MultiplyMatrices(benchmark::State& state)
         0.0F,
         1.0F,
         0.0F,
-        3.0F,
+        3.0F, // NOLINT(readability-magic-numbers)
         0.0F,
         0.0F,
         1.0F,
@@ -148,7 +148,7 @@ void benchmarkMatrix4InverseTranslation(benchmark::State& state)
         0.0F,
         1.0F,
         0.0F,
-        3.0F,
+        3.0F, // NOLINT(readability-magic-numbers)
         0.0F,
         0.0F,
         1.0F,

@@ -119,17 +119,17 @@ public:
     }
 
     template <typename T>
-    [[nodiscard]] constexpr auto multiply(const T& rhs) const noexcept
+    [[nodiscard]] constexpr auto multiply(const T& rhs) const noexcept // NOLINT(bugprone-exception-escape)
     {
         std::array<float, 4> result = {0.0F};
 
         for (size_t row = 0; row < 4; ++row)
         {
             using namespace impl;
-            result[row] = m_elements.at(getIndexFromRowColumn(row, 0)) * rhs.x() +
-                          m_elements.at(getIndexFromRowColumn(row, 1)) * rhs.y() +
-                          m_elements.at(getIndexFromRowColumn(row, 2)) * rhs.z() +
-                          m_elements.at(getIndexFromRowColumn(row, 3)) * rhs.w();
+            result.at(row) = m_elements.at(getIndexFromRowColumn(row, 0)) * rhs.x() +
+                             m_elements.at(getIndexFromRowColumn(row, 1)) * rhs.y() +
+                             m_elements.at(getIndexFromRowColumn(row, 2)) * rhs.z() +
+                             m_elements.at(getIndexFromRowColumn(row, 3)) * rhs.w();
         }
 
         if (!areEqual(result[3], 0.0F) && !areEqual(result[3], 1.0F))

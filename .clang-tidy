@@ -1,6 +1,6 @@
-Checks: '*, -abseil*, -android*, -cppcoreguidelines-avoid-magic-numbers, -fuchsia*, -google*, -llvm*, -modernize-use-trailing-return-type'
+Checks: '*, -abseil*, -android*, -cppcoreguidelines-avoid-magic-numbers, -fuchsia*, -google*, -hicpp-avoid-goto, -llvm*, -misc-non-private-member-variables-in-classes, -modernize-use-trailing-return-type'
 CheckOptions:
     - key: readability-magic-numbers.IgnoredFloatingPointValues
-      value: '0.5;1.0;100.0'
+      value: '0.5;1.0;2.0;100.0'
     - key: readability-magic-numbers.IgnoredIntegerValues
       value: '1;2;3;4;16'

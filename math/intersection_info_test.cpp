@@ -8,6 +8,7 @@
 namespace eyebeam
 {
 
+// NOLINTNEXTLINE
 TEST(IntersectionInfoTests, updateWithNewIntersectionDoesNotUpdateIfNewTimeIsLargerThanOldTime)
 {
     // GIVEN:
@@ -26,6 +27,7 @@ TEST(IntersectionInfoTests, updateWithNewIntersectionDoesNotUpdateIfNewTimeIsLar
     EXPECT_EQ(old.getTime(), expectedTime);
 }
 
+// NOLINTNEXTLINE
 TEST(IntersectionInfoTests, updateWithNewIntersectionUpdatesWhenNewTimeIsSmallerThanOldTime)
 {
     // GIVEN:
@@ -44,6 +46,7 @@ TEST(IntersectionInfoTests, updateWithNewIntersectionUpdatesWhenNewTimeIsSmaller
     EXPECT_EQ(old.getTime(), expectedTime);
 }
 
+// NOLINTNEXTLINE
 TEST(IntersectionInfoTests, defaultIntersectionInfoDoesNotIntersect)
 {
     // GIVEN:

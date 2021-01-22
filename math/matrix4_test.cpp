@@ -19,7 +19,7 @@ public:
               0.0F,
               1.0F,
               0.0F,
-              -3.0F,
+              -3.0F, // NOLINT(readability-magic-numbers)
               0.0F,
               0.0F,
               1.0F,
@@ -49,8 +49,8 @@ public:
     }
 
 protected:
-    Matrix4 m_translation;
-    Matrix4 m_rotation;
+    Matrix4 m_translation; // NOLINT(cppcoreguidelines-non-private-member-variables-in-classes)
+    Matrix4 m_rotation;    // NOLINT(cppcoreguidelines-non-private-member-variables-in-classes)
 };
 
 // NOLINTNEXTLINE
