@@ -1,4 +1,5 @@
 add_library(math
+    angle.cpp
     components.cpp
     constexpr_math.cpp
     intersection_info.cpp
@@ -16,6 +17,7 @@ target_link_libraries(math PRIVATE
 )
 
 add_executable(mathtest
+    angle_test.cpp
     constexpr_math_test.cpp
     intersection_info_test.cpp
     matrix4_test.cpp
