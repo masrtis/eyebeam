@@ -8,6 +8,7 @@ add_library(math
     point3.cpp
     random_generator.cpp
     ray3.cpp
+    transform.cpp
     vector3.cpp
 )
 
@@ -24,6 +25,7 @@ add_executable(mathtest
     normal3_test.cpp
     point3_test.cpp
     ray3_test.cpp
+    transform_test.cpp
     vector3_test.cpp
 )
 
@@ -35,18 +37,19 @@ target_link_libraries(mathtest PRIVATE
 )
 
 add_executable(mathbench
+    math_benchmark_main.cpp
     constexpr_math_benchmark.cpp
     matrix4_benchmark.cpp
     point3_benchmark.cpp
     ray3_benchmark.cpp
+    transform_benchmark.cpp
     vector3_benchmark.cpp
-    math_benchmark_main.cpp
 )
 
 target_link_libraries(mathbench PRIVATE
     enable_cxx_17
     enable_warnings
     math
-    benchmark::benchmark
     benchmark::benchmark_main
+    benchmark::benchmark
 )
