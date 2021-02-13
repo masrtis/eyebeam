@@ -24,8 +24,8 @@ auto& getRng()
 
 float RandomGenerator::generateRandomFloat()
 {
-    static std::uniform_real_distribution<float> s_uniformDistribution;
-    return s_uniformDistribution(getRng());
+    static std::normal_distribution<float> s_normalDistribution;
+    return s_normalDistribution(getRng());
 }
 
 Vector3 RandomGenerator::generateRandomVector3()
