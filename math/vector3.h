@@ -83,6 +83,15 @@ constexpr auto lengthSquared(const Vector3& v) noexcept
 
 std::ostream& operator<<(std::ostream& os, const Vector3& out);
 
+namespace Axes
+{
+
+static constexpr Vector3 X(1.0F, 0.0F, 0.0F);
+static constexpr Vector3 Y(0.0F, 1.0F, 0.0F);
+static constexpr Vector3 Z(0.0F, 0.0F, 1.0F);
+
+} // namespace Axes
+
 } // namespace eyebeam
 
 #endif // INCLUDED_VECTOR4_H_
