@@ -1,7 +1,9 @@
 #include "transform.h"
 
 #include "matrix4.h"
+#include "normal3.h"
 #include "point3.h"
+#include "ray3.h"
 #include "vector3.h"
 
 #include <cmath>
@@ -12,6 +14,17 @@ namespace eyebeam
 
 Transform::Transform(const AlignedMatrixStorage& elements) : m_matrix(elements), m_inverse(m_matrix.inverse())
 {
+}
+
+Normal3 Transform::multiply(const Normal3& n) const noexcept
+{
+    const auto transposedInverse(m_inverse.transpose());
+    return Normal3(transposedInverse.multiply(Vector3(n)));
+}
+
+Ray3 Transform::multiply(const Ray3& r) const noexcept
+{
+    return Ray3(m_matrix.multiply(r.origin()), m_matrix.multiply(r.direction()));
 }
 
 Transform Transform::rotateX(Radians theta)

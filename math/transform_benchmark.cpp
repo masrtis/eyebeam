@@ -125,6 +125,76 @@ void benchmarkTransformLookAt(benchmark::State& state)
     }
 }
 
+void benchmarkTransformApplyToPoint(benchmark::State& state)
+{
+    const auto p(RandomGenerator::generateRandomPoint3());
+    const auto t(Transform::rotateAxisAngle(
+        RandomGenerator::generateRandomVector3(),
+        Radians(RandomGenerator::generateRandomFloat())));
+
+    for ([[maybe_unused]] auto s : state)
+    {
+        const auto transformed(t.multiply(p));
+        benchmark::DoNotOptimize(transformed);
+    }
+}
+
+void benchmarkTransformApplyToVector(benchmark::State& state)
+{
+    const auto v(RandomGenerator::generateRandomVector3());
+    const auto t(Transform::rotateAxisAngle(
+        RandomGenerator::generateRandomVector3(),
+        Radians(RandomGenerator::generateRandomFloat())));
+
+    for ([[maybe_unused]] auto s : state)
+    {
+        const auto transformed(t.multiply(v));
+        benchmark::DoNotOptimize(transformed);
+    }
+}
+
+void benchmarkTransformApplyToNormal(benchmark::State& state)
+{
+    const auto n(RandomGenerator::generateRandomNormal3());
+    const auto t(Transform::rotateAxisAngle(
+        RandomGenerator::generateRandomVector3(),
+        Radians(RandomGenerator::generateRandomFloat())));
+
+    for ([[maybe_unused]] auto s : state)
+    {
+        const auto transformed(t.multiply(n));
+        benchmark::DoNotOptimize(transformed);
+    }
+}
+
+void benchmarkTransformApplyToRay(benchmark::State& state)
+{
+    const auto r(RandomGenerator::generateRandomRay3());
+    const auto t(Transform::rotateAxisAngle(
+        RandomGenerator::generateRandomVector3(),
+        Radians(RandomGenerator::generateRandomFloat())));
+
+    for ([[maybe_unused]] auto s : state)
+    {
+        const auto transformed(t.multiply(r));
+        benchmark::DoNotOptimize(transformed);
+    }
+}
+
+void benchmarkTransformCompose(benchmark::State& state)
+{
+    const auto t(Transform::translate(RandomGenerator::generateRandomVector3()));
+    const auto rAxisAngle(Transform::rotateAxisAngle(
+        RandomGenerator::generateRandomVector3(),
+        Radians(RandomGenerator::generateRandomFloat())));
+
+    for ([[maybe_unused]] auto s : state)
+    {
+        const auto transformed(rAxisAngle.multiply(t));
+        benchmark::DoNotOptimize(transformed);
+    }
+}
+
 // NOLINTNEXTLINE
 BENCHMARK(benchmarkTransformDefaultConstruction);
 
@@ -154,6 +224,21 @@ BENCHMARK(benchmarkTransformRotateAxisAngle);
 
 // NOLINTNEXTLINE
 BENCHMARK(benchmarkTransformLookAt);
+
+// NOLINTNEXTLINE
+BENCHMARK(benchmarkTransformApplyToPoint);
+
+// NOLINTNEXTLINE
+BENCHMARK(benchmarkTransformApplyToVector);
+
+// NOLINTNEXTLINE
+BENCHMARK(benchmarkTransformApplyToNormal);
+
+// NOLINTNEXTLINE
+BENCHMARK(benchmarkTransformApplyToRay);
+
+// NOLINTNEXTLINE
+BENCHMARK(benchmarkTransformCompose);
 
 } // namespace
 
