@@ -5,6 +5,7 @@
 #include "ray3.h"
 #include "vector3.h"
 
+#include <cmath>
 #include <random>
 
 namespace eyebeam
@@ -26,6 +27,11 @@ float RandomGenerator::generateRandomFloat()
 {
     static std::normal_distribution<float> s_normalDistribution;
     return s_normalDistribution(getRng());
+}
+
+float RandomGenerator::generateRandomPositiveFloat()
+{
+    return std::abs(generateRandomFloat());
 }
 
 Vector3 RandomGenerator::generateRandomVector3()
