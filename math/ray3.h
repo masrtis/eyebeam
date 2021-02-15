@@ -35,6 +35,9 @@ private:
 
 Point3 evaluate(const Ray3& ray, float t) noexcept;
 
+bool operator==(const Ray3& lhs, const Ray3& rhs) noexcept;
+bool operator!=(const Ray3& lhs, const Ray3& rhs) noexcept;
+
 } // namespace eyebeam
 
 #endif // INCLUDED_RAY3_H_

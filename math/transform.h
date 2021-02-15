@@ -3,6 +3,8 @@
 
 #include "angle.h"
 #include "matrix4.h"
+#include "normal3.h"
+#include "ray3.h"
 #include "vector3.h"
 
 #include <iosfwd>
@@ -10,7 +12,9 @@
 namespace eyebeam
 {
 
+class Normal3;
 class Point3;
+class Ray3;
 
 class Transform
 {
@@ -31,6 +35,24 @@ public:
     {
         return Transform(m_matrix.transpose(), m_inverse.transpose());
     }
+
+    [[nodiscard]] constexpr auto multiply(const Point3& p) const noexcept
+    {
+        return m_matrix.multiply(p);
+    }
+
+    [[nodiscard]] constexpr auto multiply(const Vector3& v) const noexcept
+    {
+        return m_matrix.multiply(v);
+    }
+
+    [[nodiscard]] constexpr auto multiply(const Transform& t) const noexcept
+    {
+        return Transform(m_matrix.multiply(t.m_matrix), t.m_inverse.multiply(m_inverse));
+    }
+
+    [[nodiscard]] Normal3 multiply(const Normal3& n) const noexcept;
+    [[nodiscard]] Ray3 multiply(const Ray3& r) const noexcept;
 
     [[nodiscard]] static constexpr auto translate(const Vector3& deltaX) noexcept
     {

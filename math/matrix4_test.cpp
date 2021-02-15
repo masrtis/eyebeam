@@ -27,7 +27,7 @@ public:
               0.0F,
               0.0F,
               0.0F,
-              1.0F})
+              1.0F}) // translate to (2, -3, 2)
         , m_rotation(AlignedMatrixStorage{
               1.0F,
               0.0F,
@@ -44,7 +44,7 @@ public:
               0.0F,
               0.0F,
               0.0F,
-              1.0F})
+              1.0F}) // pi / 2 rotation about the x axis
     {
     }
 

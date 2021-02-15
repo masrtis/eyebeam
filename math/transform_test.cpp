@@ -170,4 +170,108 @@ TEST(TransformTests, LookAtConstructsCorrectInvertibleCameraSpaceMatrix)
     EXPECT_EQ(result, cameraToWorld);
 }
 
+// NOLINTNEXTLINE
+TEST(TransformTests, TransformMultiplyScalesPoints)
+{
+    // GIVEN:
+    const auto x = RandomGenerator::generateRandomPositiveFloat();
+    const auto y = RandomGenerator::generateRandomPositiveFloat();
+    const auto z = RandomGenerator::generateRandomPositiveFloat();
+    const auto scaleTransform(Transform::scale(x, y, z));
+    const Point3 p(1.0F, 1.0F, 1.0F);
+
+    // WHEN:
+    const auto result(scaleTransform.multiply(p));
+
+    // THEN:
+    const Point3 expected(x, y, z);
+    EXPECT_EQ(expected, result);
+}
+
+// NOLINTNEXTLINE
+TEST(TransformTests, TransformMultiplyScalesVectors)
+{
+    // GIVEN:
+    const auto x = RandomGenerator::generateRandomPositiveFloat();
+    const auto y = RandomGenerator::generateRandomPositiveFloat();
+    const auto z = RandomGenerator::generateRandomPositiveFloat();
+    const auto scaleTransform(Transform::scale(x, y, z));
+    const Vector3 v(1.0F, 1.0F, 1.0F);
+
+    // WHEN:
+    const auto result(scaleTransform.multiply(v));
+
+    // THEN:
+    const Vector3 expected(x, y, z);
+    EXPECT_EQ(expected, result);
+}
+
+// NOLINTNEXTLINE
+TEST(TransformTests, TransformMultiplyScalesNormals)
+{
+    // GIVEN:
+    const auto x = RandomGenerator::generateRandomPositiveFloat();
+    const auto y = RandomGenerator::generateRandomPositiveFloat();
+    const auto z = RandomGenerator::generateRandomPositiveFloat();
+    const auto scaleTransform(Transform::scale(x, y, z));
+    const Normal3 n(Vector3(1.0F, 1.0F, 1.0F));
+
+    // WHEN:
+    const auto result(scaleTransform.multiply(n));
+
+    // THEN:
+    const Normal3 expected(Vector3(1.0F / x, 1.0F / y, 1.0F / z));
+    EXPECT_EQ(expected, result);
+}
+
+// NOLINTNEXTLINE
+TEST(TransformTests, TransformMultiplyScalesRays)
+{
+    // GIVEN:
+    const auto x = RandomGenerator::generateRandomPositiveFloat();
+    const auto y = RandomGenerator::generateRandomPositiveFloat();
+    const auto z = RandomGenerator::generateRandomPositiveFloat();
+    const auto scaleTransform(Transform::scale(x, y, z));
+    const Ray3 r(Point3(1.0F, 1.0F, 1.0F), Vector3(1.0F, 1.0F, 1.0F));
+
+    // WHEN:
+    const auto result(scaleTransform.multiply(r));
+
+    // THEN:
+    const Ray3 expected(Point3(x, y, z), Vector3(x, y, z));
+    EXPECT_EQ(expected, result);
+}
+
+// NOLINTNEXTLINE
+TEST(TransformTests, TransformMultiplyComposesTransforms)
+{
+    // GIVEN:
+    const auto translation(Transform::translate(Vector3(2.0F, -3.0F, 2.0F)));
+    const auto rotation(Transform::rotateX(Radians(constants::pi / 2.0F)));
+
+    // WHEN:
+    const auto result(translation.multiply(rotation));
+
+    // THEN:
+    const Transform expected(AlignedMatrixStorage{
+        1.0F,
+        0.0F,
+        0.0F,
+        2.0F,
+        0.0F,
+        0.0F,
+        -1.0F,
+        -3.0F,
+        0.0F,
+        1.0F,
+        0.0F,
+        2.0F,
+        0.0F,
+        0.0F,
+        0.0F,
+        1.0F});
+
+    EXPECT_EQ(result, expected);
+}
+
 } // namespace eyebeam

@@ -2,6 +2,7 @@
 #define INCLUDED_MATRIX4_H_
 
 #include "constexpr_math.h"
+#include "point3.h"
 #include "vector3.h"
 
 #include <array>
@@ -118,8 +119,7 @@ public:
             m_elements[getIndexFromRowColumn(3, 3)]});
     }
 
-    template <typename T>
-    [[nodiscard]] constexpr auto multiply(const T& rhs) const noexcept // NOLINT(bugprone-exception-escape)
+    [[nodiscard]] constexpr auto multiply(const Point3& rhs) const noexcept
     {
         std::array<float, 4> result = {0.0F};
 
@@ -129,19 +129,33 @@ public:
             result.at(row) = m_elements.at(getIndexFromRowColumn(row, 0)) * rhs.x() +
                              m_elements.at(getIndexFromRowColumn(row, 1)) * rhs.y() +
                              m_elements.at(getIndexFromRowColumn(row, 2)) * rhs.z() +
-                             m_elements.at(getIndexFromRowColumn(row, 3)) * rhs.w();
+                             m_elements.at(getIndexFromRowColumn(row, 3));
         }
 
-        if (!areEqual(result[3], 0.0F) && !areEqual(result[3], 1.0F))
+        if (!areEqual(result[3], 1.0F))
         {
             const auto homogenousReciprocal = 1.0F / result[3];
             result[0] *= homogenousReciprocal;
             result[1] *= homogenousReciprocal;
             result[2] *= homogenousReciprocal;
-            result[3] = 1.0F;
         }
 
-        return T(result[0], result[1], result[2]);
+        return Point3(result[0], result[1], result[2]);
+    }
+
+    [[nodiscard]] constexpr auto multiply(const Vector3& rhs) const noexcept
+    {
+        std::array<float, 3> result = {0.0F};
+
+        for (size_t row = 0; row < 3; ++row)
+        {
+            using namespace impl;
+            result.at(row) = m_elements.at(getIndexFromRowColumn(row, 0)) * rhs.x() +
+                             m_elements.at(getIndexFromRowColumn(row, 1)) * rhs.y() +
+                             m_elements.at(getIndexFromRowColumn(row, 2)) * rhs.z();
+        }
+
+        return Vector3(result[0], result[1], result[2]);
     }
 
     [[nodiscard]] constexpr auto multiply(const Matrix4& rhs) const noexcept
