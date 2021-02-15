@@ -13,15 +13,18 @@ class RandomGenerator
 {
 public:
     static float generateRandomFloat();
+    static float generateRandomPositiveFloat();
     static Vector3 generateRandomVector3();
     static Point3 generateRandomPoint3();
     static Ray3 generateRandomRay3();
     static Normal3 generateRandomNormal3();
 };
 
-template <typename T> class TypedRandomGenerator;
+template <typename T>
+class TypedRandomGenerator;
 
-template <> class TypedRandomGenerator<float>
+template <>
+class TypedRandomGenerator<float>
 {
 public:
     static auto generate()
@@ -30,7 +33,8 @@ public:
     }
 };
 
-template <> class TypedRandomGenerator<Vector3>
+template <>
+class TypedRandomGenerator<Vector3>
 {
 public:
     static auto generate()
@@ -39,7 +43,8 @@ public:
     }
 };
 
-template <> class TypedRandomGenerator<Point3>
+template <>
+class TypedRandomGenerator<Point3>
 {
 public:
     static auto generate()
@@ -48,7 +53,8 @@ public:
     }
 };
 
-template <> class TypedRandomGenerator<Ray3>
+template <>
+class TypedRandomGenerator<Ray3>
 {
 public:
     static auto generate()
@@ -57,7 +63,8 @@ public:
     }
 };
 
-template <> class TypedRandomGenerator<Normal3>
+template <>
+class TypedRandomGenerator<Normal3>
 {
 public:
     static auto generate()

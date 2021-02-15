@@ -24,7 +24,7 @@ void benchmarkStdAbs(benchmark::State& state)
 
 void benchmarkStdSqrt(benchmark::State& state)
 {
-    const auto rand(std::abs(RandomGenerator::generateRandomFloat()));
+    const auto rand(std::abs(RandomGenerator::generateRandomPositiveFloat()));
 
     for ([[maybe_unused]] auto s : state)
     {
@@ -34,7 +34,7 @@ void benchmarkStdSqrt(benchmark::State& state)
 
 void benchmarkConstexprSqrt(benchmark::State& state)
 {
-    const auto rand(std::abs(RandomGenerator::generateRandomFloat()));
+    const auto rand(RandomGenerator::generateRandomPositiveFloat());
 
     for ([[maybe_unused]] auto s : state)
     {
