@@ -51,6 +51,14 @@ constexpr bool areEqual(float left, float right) noexcept
     return abs(left - right) <= epsilon * std::max({1.0F, left, right});
 }
 
+template <size_t Size>
+bool areEqual(const std::array<float, Size>& left, const std::array<float, Size>& right)
+{
+    return std::equal(begin(left), end(left), begin(right), end(right), [](float x, float y) {
+        return areEqual(x, y);
+    });
+}
+
 } // namespace eyebeam
 
 #endif // INCLUDED_CONSTEXPR_MATH_H_
