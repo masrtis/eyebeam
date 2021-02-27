@@ -111,7 +111,7 @@ Matrix4 Matrix4::inverse() const
 
 bool Matrix4::isEqual(const Matrix4& other) const
 {
-    return std::equal(begin(m_elements), end(m_elements), begin(other.m_elements), end(other.m_elements), areEqual);
+    return areEqual(m_elements, other.m_elements);
 }
 
 void Matrix4::print(std::ostream& os) const

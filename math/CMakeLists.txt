@@ -6,6 +6,7 @@ add_library(math
     matrix4.cpp
     normal3.cpp
     point3.cpp
+    quadratic_solver.cpp
     random_generator.cpp
     ray3.cpp
     transform.cpp
@@ -24,6 +25,7 @@ add_executable(mathtest
     matrix4_test.cpp
     normal3_test.cpp
     point3_test.cpp
+    quadratic_solver_test.cpp
     ray3_test.cpp
     transform_test.cpp
     vector3_test.cpp
@@ -41,6 +43,7 @@ add_executable(mathbench
     constexpr_math_benchmark.cpp
     matrix4_benchmark.cpp
     point3_benchmark.cpp
+    quadratic_solver_benchmark.cpp
     ray3_benchmark.cpp
     transform_benchmark.cpp
     vector3_benchmark.cpp
