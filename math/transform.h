@@ -36,7 +36,7 @@ public:
         return Transform(m_matrix.transpose(), m_inverse.transpose());
     }
 
-    [[nodiscard]] constexpr auto multiply(const Point3& p) const noexcept
+    [[nodiscard]] constexpr auto multiply(const Point3& p) const
     {
         return m_matrix.multiply(p);
     }
@@ -52,7 +52,7 @@ public:
     }
 
     [[nodiscard]] Normal3 multiply(const Normal3& n) const noexcept;
-    [[nodiscard]] Ray3 multiply(const Ray3& r) const noexcept;
+    [[nodiscard]] Ray3 multiply(const Ray3& r) const;
 
     [[nodiscard]] static constexpr auto translate(const Vector3& deltaX) noexcept
     {

@@ -9,8 +9,12 @@ namespace constants
 {
 
 constexpr auto pi = 3.1415926535F;
+constexpr auto half_circle = 180.0F;
 
-}
+constexpr auto radians_to_degrees = half_circle / pi;
+constexpr auto degrees_to_radians = pi / half_circle;
+
+} // namespace constants
 
 class Radians
 {
@@ -19,6 +23,7 @@ public:
     {
     }
 
+    // NOLINTNEXTLINE(hicpp-explicit-conversions)
     constexpr operator float() const noexcept
     {
         return m_angle;
@@ -35,6 +40,7 @@ public:
     {
     }
 
+    // NOLINTNEXTLINE(hicpp-explicit-conversions)
     constexpr operator float() const noexcept
     {
         return m_angle;
@@ -46,12 +52,12 @@ private:
 
 constexpr auto toRadians(Degrees theta)
 {
-    return theta * (constants::pi / 180.0F);
+    return Radians(theta * constants::degrees_to_radians);
 }
 
 constexpr auto toDegrees(Radians theta)
 {
-    return theta * (180.0F / constants::pi);
+    return Degrees(theta * constants::radians_to_degrees);
 }
 
 } // namespace eyebeam

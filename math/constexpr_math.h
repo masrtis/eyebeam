@@ -42,8 +42,7 @@ constexpr float sqrt(float x)
     return guess;
 }
 
-// NOLINTNEXTLINE(bugprone-exception-escape)
-constexpr bool areEqual(float left, float right) noexcept
+constexpr bool areEqual(float left, float right)
 {
     static_assert(std::numeric_limits<float>::epsilon() > 0.0F);
 
