@@ -5,6 +5,7 @@
 #include <gtest/gtest.h>
 
 #include <array>
+#include <limits>
 
 namespace eyebeam
 {
@@ -12,7 +13,7 @@ namespace eyebeam
 class QuadraticSolverTestsFixture : public ::testing::Test
 {
 protected:
-    QuadraticRoots m_roots;
+    QuadraticRoots m_roots{std::numeric_limits<float>::infinity(), std::numeric_limits<float>::infinity()};
 };
 
 // NOLINTNEXTLINE

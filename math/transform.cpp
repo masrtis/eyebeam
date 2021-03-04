@@ -22,7 +22,7 @@ Normal3 Transform::multiply(const Normal3& n) const noexcept
     return Normal3(transposedInverse.multiply(Vector3(n)));
 }
 
-Ray3 Transform::multiply(const Ray3& r) const noexcept
+Ray3 Transform::multiply(const Ray3& r) const
 {
     return Ray3(m_matrix.multiply(r.origin()), m_matrix.multiply(r.direction()));
 }

@@ -7,6 +7,7 @@
 namespace eyebeam
 {
 
+// NOLINTNEXTLINE
 TEST(AngleTests, 180DegreesConvertsToPiRadians)
 {
     // GIVEN:
@@ -19,6 +20,7 @@ TEST(AngleTests, 180DegreesConvertsToPiRadians)
     EXPECT_TRUE(areEqual(result, expected));
 }
 
+// NOLINTNEXTLINE
 TEST(AngleTests, 2PiRadiansConvertsTo360Degrees)
 {
     // GIVEN:

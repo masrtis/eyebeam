@@ -77,14 +77,12 @@ private:
     std::array<float, 4> m_components;
 };
 
-// NOLINTNEXTLINE(bugprone-exception-escape)
-constexpr auto operator==(const Components& left, const Components& right) noexcept
+constexpr auto operator==(const Components& left, const Components& right)
 {
     return areEqual(left.x(), right.x()) && areEqual(left.y(), right.y()) && areEqual(left.z(), right.z());
 }
 
-// NOLINTNEXTLINE(bugprone-exception-escape)
-constexpr auto operator!=(const Components& left, const Components& right) noexcept
+constexpr auto operator!=(const Components& left, const Components& right)
 {
     return !(left == right);
 }

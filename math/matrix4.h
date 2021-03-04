@@ -119,7 +119,7 @@ public:
             m_elements[getIndexFromRowColumn(3, 3)]});
     }
 
-    [[nodiscard]] constexpr auto multiply(const Point3& rhs) const noexcept
+    [[nodiscard]] constexpr auto multiply(const Point3& rhs) const
     {
         std::array<float, 4> result = {0.0F};
 
@@ -143,7 +143,7 @@ public:
         return Point3(result[0], result[1], result[2]);
     }
 
-    [[nodiscard]] constexpr auto multiply(const Vector3& rhs) const noexcept
+    [[nodiscard]] constexpr auto multiply(const Vector3& rhs) const
     {
         std::array<float, 3> result = {0.0F};
 
