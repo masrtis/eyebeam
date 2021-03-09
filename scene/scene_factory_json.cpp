@@ -3,6 +3,10 @@
 #include "scene.h"
 #include "scene_resolution.h"
 
+#include "point3.h"
+#include "transform.h"
+#include "vector3.h"
+
 #include <nlohmann/json.hpp>
 
 #include <chrono>
@@ -48,6 +52,69 @@ auto readResolution(const Json& sceneJson)
                                              : std::nullopt;
 }
 
+template <typename T, size_t Size>
+auto readMathArray(const Json& parent, std::string_view key)
+{
+    const auto value(parent.find(key));
+
+    if (value == parent.end())
+    {
+        return std::optional<T>(std::nullopt);
+    }
+
+    if (!value->is_array())
+    {
+        return std::optional<T>(std::nullopt);
+    }
+
+    if (value->size() != Size)
+    {
+        return std::optional<T>(std::nullopt);
+    }
+
+    const auto valuesArray = value->get<std::array<float, Size>>();
+    return std::make_optional<T>(valuesArray);
+}
+
+auto readPoint(const Json& parent, std::string_view key)
+{
+    return readMathArray<Point3, 3>(parent, key);
+}
+
+auto readVector(const Json& parent, std::string_view key)
+{
+    return readMathArray<Vector3, 3>(parent, key);
+}
+
+auto readCamera(const Json& sceneJson)
+{
+    const auto lookAtJson(sceneJson.find("camera"));
+    if (lookAtJson == sceneJson.end())
+    {
+        return std::optional<Transform>(std::nullopt);
+    }
+
+    const auto position(readPoint(*lookAtJson, "position"));
+    if (!position.has_value())
+    {
+        return std::optional<Transform>(std::nullopt);
+    }
+
+    const auto lookAt(readPoint(*lookAtJson, "lookAt"));
+    if (!lookAt.has_value())
+    {
+        return std::optional<Transform>(std::nullopt);
+    }
+
+    const auto up(readVector(*lookAtJson, "up"));
+    if (!up.has_value())
+    {
+        return std::optional<Transform>(std::nullopt);
+    }
+
+    return std::make_optional<Transform>(Transform::lookAt(*position, *lookAt, *up));
+}
+
 } // namespace
 
 std::unique_ptr<Scene> SceneFactoryJson::buildScene(std::string_view fileName) const
@@ -62,6 +129,14 @@ std::unique_ptr<Scene> SceneFactoryJson::buildScene(std::string_view fileName) c
         if (!resolution.has_value())
         {
             std::cerr << "Error loading resolution from " << fileName << "\n";
+            return nullptr;
+        }
+
+        const auto worldToCameraTransform(readCamera(sceneJson));
+
+        if (!worldToCameraTransform.has_value())
+        {
+            std::cerr << "Error loading look at transform from " << fileName << "\n";
             return nullptr;
         }
 

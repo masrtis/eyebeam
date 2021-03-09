@@ -17,5 +17,6 @@ target_link_libraries(scene PRIVATE
 )
 
 target_link_libraries(scene PUBLIC
+    math
     nlohmann_json::nlohmann_json
 )

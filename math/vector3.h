@@ -13,8 +13,12 @@ namespace eyebeam
 class Vector3 : public Components
 {
 public:
-    Vector3() = default;
+    constexpr Vector3() = default;
     explicit constexpr Vector3(float x, float y, float z) noexcept : Components(x, y, z, 0.0F)
+    {
+    }
+
+    explicit constexpr Vector3(const std::array<float, 3>& values) noexcept : Vector3(values[0], values[1], values[2])
     {
     }
 
