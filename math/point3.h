@@ -5,6 +5,7 @@
 #include "components.h"
 #include "vector3.h"
 
+#include <array>
 #include <iosfwd>
 
 namespace eyebeam
@@ -18,6 +19,10 @@ public:
     }
 
     explicit constexpr Point3(float x, float y, float z) noexcept : Components(x, y, z, 1.0F)
+    {
+    }
+
+    explicit constexpr Point3(const std::array<float, 3>& values) noexcept : Point3(values[0], values[1], values[2])
     {
     }
 

@@ -1,7 +1,23 @@
 {
-    "resolution":
-    {
+    "resolution": {
         "width": 1024,
-        "height": 768
+        "height": 1024
+    },
+    "camera": {
+        "position": [
+            -1.0,
+            0.0,
+            0.0
+        ],
+        "lookAt": [
+            0.0,
+            0.0,
+            0.0
+        ],
+        "up": [
+            0.0,
+            1.0,
+            0.0
+        ]
     }
 }

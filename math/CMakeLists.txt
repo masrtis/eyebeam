@@ -18,6 +18,10 @@ target_link_libraries(math PRIVATE
     enable_warnings
 )
 
+target_include_directories(math PUBLIC
+    .
+)
+
 add_executable(mathtest
     angle_test.cpp
     constexpr_math_test.cpp
