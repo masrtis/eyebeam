@@ -22,7 +22,8 @@ public:
     {
     }
 
-    explicit constexpr Point3(const std::array<float, 3>& values) noexcept : Point3(values[0], values[1], values[2])
+    explicit constexpr Point3(const UnalignedComponentStorage<3>& values) noexcept
+        : Point3(values[0], values[1], values[2])
     {
     }
 

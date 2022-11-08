@@ -6,8 +6,7 @@ add_library(application
 )
 
 target_link_libraries(application PUBLIC
-    enable_cxx_17
-    enable_warnings
+    cxx_base_options
     scene
     SDL2::SDL2
 )

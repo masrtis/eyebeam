@@ -12,8 +12,7 @@ target_include_directories(scene PUBLIC
 )
 
 target_link_libraries(scene PRIVATE
-    enable_cxx_17
-    enable_warnings
+    cxx_base_options
 )
 
 target_link_libraries(scene PUBLIC

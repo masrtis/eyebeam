@@ -32,7 +32,7 @@ void scaleRow(std::array<float, 16>& toInvert, std::array<float, 16>& inverse, s
 
 } // namespace impl
 
-using UnalignedMatrixStorage = std::array<float, 16>;
+using UnalignedMatrixStorage = UnalignedComponentStorage<16>;
 
 struct alignas(16) AlignedMatrixStorage
 {
@@ -73,6 +73,11 @@ public:
         float e33) noexcept
         : Matrix4(AlignedMatrixStorage{e00, e01, e02, e03, e10, e11, e12, e13, e20, e21, e22, e23, e30, e31, e32, e33})
     {
+    }
+
+    [[nodiscard]] constexpr UnalignedMatrixStorage getUnaligned() const noexcept
+    {
+        return m_elements;
     }
 
     [[nodiscard]] constexpr static Matrix4 buildIdentity() noexcept

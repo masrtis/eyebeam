@@ -9,11 +9,13 @@
             "type": "cppvsdbg",
             "request": "launch",
             "program": "${command:cmake.launchTargetPath}",
-            "args": ["./data/scenes/scene.json"],
+            "args": [
+                "./data/scenes/scene.json"
+            ],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [],
-            "externalConsole": true,
+            "console": "newExternalWindow",
         }
     ]
 }

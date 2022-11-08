@@ -3,6 +3,7 @@
 
 #include "normal3.h"
 #include "point3.h"
+#include "quadratic_solver.h"
 
 namespace eyebeam
 {
@@ -11,13 +12,7 @@ class IntersectionInfo
 {
 public:
     IntersectionInfo();
-
-    IntersectionInfo(const Point3& intersection, const Normal3& normal, float time)
-        : m_intersectionPoint(intersection)
-        , m_normal(norm(normal))
-        , m_time(time)
-    {
-    }
+    IntersectionInfo(const Point3& intersection, const Normal3& normal, float time);
 
     [[nodiscard]] Normal3 getNormal() const noexcept
     {
@@ -42,6 +37,7 @@ private:
     float m_time;
 };
 
+float getEarliestViableIntersection(const QuadraticRoots& t) noexcept;
 bool isIntersecting(const IntersectionInfo& intersection) noexcept;
 
 } // namespace eyebeam

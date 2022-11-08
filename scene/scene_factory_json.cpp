@@ -52,38 +52,39 @@ auto readResolution(const Json& sceneJson)
                                              : std::nullopt;
 }
 
-template <typename T, size_t Size>
+template <std::size_t ExpectedSize>
 auto readMathArray(const Json& parent, std::string_view key)
 {
+    using ComponentStorage = UnalignedComponentStorage<ExpectedSize>;
+
     const auto value(parent.find(key));
 
     if (value == parent.end())
     {
-        return std::optional<T>(std::nullopt);
+        return std::optional<ComponentStorage>();
     }
 
     if (!value->is_array())
     {
-        return std::optional<T>(std::nullopt);
+        return std::optional<ComponentStorage>();
     }
 
-    if (value->size() != Size)
+    if (value->size() != ExpectedSize)
     {
-        return std::optional<T>(std::nullopt);
+        return std::optional<ComponentStorage>();
     }
 
-    const auto valuesArray = value->get<std::array<float, Size>>();
-    return std::make_optional<T>(valuesArray);
+    return std::make_optional<ComponentStorage>(value->get<ComponentStorage>());
 }
 
 auto readPoint(const Json& parent, std::string_view key)
 {
-    return readMathArray<Point3, 3>(parent, key);
+    return readMathArray<3>(parent, key);
 }
 
 auto readVector(const Json& parent, std::string_view key)
 {
-    return readMathArray<Vector3, 3>(parent, key);
+    return readMathArray<3>(parent, key);
 }
 
 auto readCamera(const Json& sceneJson)
@@ -91,28 +92,33 @@ auto readCamera(const Json& sceneJson)
     const auto lookAtJson(sceneJson.find("camera"));
     if (lookAtJson == sceneJson.end())
     {
-        return std::optional<Transform>(std::nullopt);
+        return std::optional<UnalignedTransformStorage>();
     }
 
-    const auto position(readPoint(*lookAtJson, "position"));
-    if (!position.has_value())
+    const auto optionalPosition(readPoint(*lookAtJson, "position"));
+    if (!optionalPosition.has_value())
     {
-        return std::optional<Transform>(std::nullopt);
+        return std::optional<UnalignedTransformStorage>();
     }
 
-    const auto lookAt(readPoint(*lookAtJson, "lookAt"));
-    if (!lookAt.has_value())
+    const auto optionalLookAt(readPoint(*lookAtJson, "lookAt"));
+    if (!optionalLookAt.has_value())
     {
-        return std::optional<Transform>(std::nullopt);
+        return std::optional<UnalignedTransformStorage>();
     }
 
-    const auto up(readVector(*lookAtJson, "up"));
-    if (!up.has_value())
+    const auto optionalUp(readVector(*lookAtJson, "up"));
+    if (!optionalUp.has_value())
     {
-        return std::optional<Transform>(std::nullopt);
+        return std::optional<UnalignedTransformStorage>();
     }
 
-    return std::make_optional<Transform>(Transform::lookAt(*position, *lookAt, *up));
+    const Point3 position(*optionalPosition);
+    const Point3 lookAt(*optionalLookAt);
+    const Vector3 up(*optionalUp);
+
+    return std::make_optional<UnalignedTransformStorage>(
+        Transform::lookAt(position, lookAt, up).getTransformUnaligned());
 }
 
 } // namespace

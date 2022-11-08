@@ -62,6 +62,20 @@
         "xutility": "cpp",
         "chrono": "cpp",
         "ratio": "cpp",
-        "thread": "cpp"
+        "thread": "cpp",
+        "bit": "cpp",
+        "charconv": "cpp",
+        "clocale": "cpp",
+        "filesystem": "cpp",
+        "format": "cpp",
+        "forward_list": "cpp",
+        "fstream": "cpp",
+        "locale": "cpp",
+        "numeric": "cpp",
+        "optional": "cpp",
+        "stop_token": "cpp",
+        "valarray": "cpp",
+        "xlocbuf": "cpp",
+        "xlocmes": "cpp"
     }
 }

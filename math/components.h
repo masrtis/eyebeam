@@ -9,6 +9,9 @@
 namespace eyebeam
 {
 
+template <size_t Size>
+using UnalignedComponentStorage = std::array<float, Size>;
+
 class alignas(16) Components
 {
 public:
