@@ -14,8 +14,7 @@ add_library(math
 )
 
 target_link_libraries(math PRIVATE
-    enable_cxx_17
-    enable_warnings
+    cxx_base_options
 )
 
 target_include_directories(math PUBLIC
@@ -36,8 +35,7 @@ add_executable(mathtest
 )
 
 target_link_libraries(mathtest PRIVATE
-    enable_cxx_17
-    enable_warnings
+    cxx_base_options
     math
     GTest::gmock_main # See https://github.com/google/googletest/issues/2157#issuecomment-674361850
 )
@@ -54,8 +52,7 @@ add_executable(mathbench
 )
 
 target_link_libraries(mathbench PRIVATE
-    enable_cxx_17
-    enable_warnings
+    cxx_base_options
     math
     benchmark::benchmark_main
     benchmark::benchmark

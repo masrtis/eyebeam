@@ -8,6 +8,7 @@
 #include "vector3.h"
 
 #include <iosfwd>
+#include <utility>
 
 namespace eyebeam
 {
@@ -15,6 +16,8 @@ namespace eyebeam
 class Normal3;
 class Point3;
 class Ray3;
+
+using UnalignedTransformStorage = std::pair<UnalignedMatrixStorage, UnalignedMatrixStorage>;
 
 class Transform
 {
@@ -24,7 +27,23 @@ public:
     {
     }
 
+    constexpr Transform(const UnalignedMatrixStorage& matrix, const UnalignedMatrixStorage& inverse)
+        : m_matrix(matrix)
+        , m_inverse(inverse)
+    {
+    }
+
+    constexpr Transform(const UnalignedTransformStorage& transform) : Transform(transform.first, transform.second)
+    {
+    }
+
+    explicit Transform(const UnalignedMatrixStorage& elements);
     explicit Transform(const AlignedMatrixStorage& elements);
+
+    UnalignedTransformStorage getTransformUnaligned() const noexcept
+    {
+        return std::make_pair(m_matrix.getUnaligned(), m_inverse.getUnaligned());
+    }
 
     [[nodiscard]] constexpr auto inverse() const noexcept
     {

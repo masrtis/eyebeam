@@ -18,7 +18,8 @@ public:
     {
     }
 
-    explicit constexpr Vector3(const std::array<float, 3>& values) noexcept : Vector3(values[0], values[1], values[2])
+    explicit constexpr Vector3(const UnalignedComponentStorage<3>& values) noexcept
+        : Vector3(values[0], values[1], values[2])
     {
     }
 
